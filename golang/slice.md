@@ -60,6 +60,7 @@ type slice struct {
 ### 3.2 实现并发安全的方法
 
 1. **使用互斥锁**：
+``` go 
 type SafeSlice struct {
     sync.Mutex
     data []interface{}
@@ -76,8 +77,9 @@ func (s *SafeSlice) Get(index int) interface{} {
     defer s.Unlock()
     return s.data[index]
 }
-
+```
 2. **使用读写锁**：
+``` go 
 type RWSafeSlice struct {
     sync.RWMutex
     data []interface{}
@@ -94,8 +96,10 @@ func (s *RWSafeSlice) Write(index int, v interface{}) {
     defer s.Unlock()
     s.data[index] = v
 }
+```
 
 3. **使用通道**：
+``` go 
 type ChanSlice struct {
     data chan []interface{}
 }
@@ -107,6 +111,7 @@ func NewChanSlice() *ChanSlice {
     cs.data <- []interface{}{}
     return cs
 }
+```
 
 ## 四、性能优化
 
