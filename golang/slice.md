@@ -5,11 +5,14 @@
 ### 1.1 数据结构
 切片在 Go 中是一个运行时数据结构，由以下三部分组成：
 
+``` go 
 type slice struct {
     array unsafe.Pointer // 指向底层数组的指针
     len   int           // 切片长度
     cap   int           // 切片容量
 }
+```
+
 
 ### 1.2 内存模型
 - 切片是对底层数组的引用，不是纯引用类型
